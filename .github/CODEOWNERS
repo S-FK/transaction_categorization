@@ -2,19 +2,17 @@
 # Automatically requests a review from the listed owner(s) when a PR
 # touches the matched path. Syntax: <pattern>  <@github-username> ...
 #
-# NOTE: Replace @dhruvi-gh, @mahesh-gh, @himanshu-gh with actual GitHub
-#       usernames once all team members have created their accounts.
 
 # ── Default: Fahad reviews everything not matched below ──────────────────────
 *                           @s-fk
 
 # ── Data Engineering (Dhruvi) ─────────────────────────────────────────────────
-src/prepare_data.py         @s-fk @dhruvi-gh
-src/load_model.py           @s-fk @dhruvi-gh
-data/                       @s-fk @dhruvi-gh
+src/prepare_data.py         @s-fk @dhruvi9660
+src/load_model.py           @s-fk @dhruvi9660
+data/                       @s-fk @dhruvi9660
 
 # ── ML / Training (Mahesh) ────────────────────────────────────────────────────
-notebooks/                  @s-fk @mahesh-gh
+notebooks/                  @s-fk @Mahesh2058
 
 # ── DevOps / Infra (Fahad) ────────────────────────────────────────────────────
 Dockerfile                  @s-fk
