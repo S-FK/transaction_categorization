@@ -25,7 +25,22 @@ jobs:
 
       - name: Run flake8
         run: |
-          flake8 src/ \
+          # Collect all Python files outside venv/.git — works even before src/ is committed
+          PY_FILES=$(find . -name "*.py" \
+            -not -path "./.git/*" \
+            -not -path "./venv/*" \
+            -not -path "./.venv/*" \
+            2>/dev/null)
+
+          if [ -z "$PY_FILES" ]; then
+            echo "No Python files found — skipping lint (src/ not yet committed)"
+            exit 0
+          fi
+
+          echo "Linting files:"
+          echo "$PY_FILES"
+          # shellcheck disable=SC2086
+          flake8 $PY_FILES \
             --max-line-length=120 \
             --ignore=E501,W503 \
             --statistics
