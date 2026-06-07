@@ -131,6 +131,17 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for branch naming, commit format, and PR 
 
 ---
 
+## Contributing
+
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** for:
+- Branch naming convention (`feature/`, `fix/`, `docs/`, `chore/`)
+- Commit message format (Conventional Commits)
+- PR checklist and review process
+- Code style and lint rules
+- Who owns what and who to contact when blocked
+
+---
+
 ## GitHub Secrets Required
 
 Add these at **Settings → Secrets and variables → Actions**:
