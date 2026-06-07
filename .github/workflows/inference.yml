@@ -1,0 +1,46 @@
+name: Inference
+
+on:
+  workflow_dispatch:
+    inputs:
+      input_text:
+        description: "Bank transaction description to classify"
+        required: true
+        default: "[debit] AMAZON MKTPL*K8R2M5VN7"
+      top_k:
+        description: "Number of top predictions to show"
+        required: false
+        default: "3"
+
+jobs:
+  infer:
+    name: Run Transaction Classifier
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: inference-${{ hashFiles('requirements-inference.txt') }}
+
+      - name: Install inference dependencies
+        run: |
+          pip install --extra-index-url https://download.pytorch.org/whl/cpu \
+            -r requirements-inference.txt
+
+      - name: Run inference
+        env:
+          HF_TOKEN:      ${{ secrets.HF_TOKEN }}
+          HF_MODEL_REPO: fahadkamraan/transaction-categorizer
+          INPUT_TEXT:    ${{ github.event.inputs.input_text }}
+          TOP_K:         ${{ github.event.inputs.top_k }}
+        run: python src/inference.py

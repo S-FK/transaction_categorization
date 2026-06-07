@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Data — never commit raw or processed data files
+data/raw/
+data/processed/
+*.csv
+*.parquet
+*.jsonl
+*.pkl
+*.h5
+*.arrow
+
+# Model weights — pushed to HF Hub, not git
+*.bin
+*.safetensors
+*.pt
+*.pth
+results/
+model/
+checkpoints/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment / secrets — NEVER commit
+.env
+.env.*
+secrets.json
+
+# W&B local run files
+wandb/
+
+# macOS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Docker build cache
+.dockerignore
