@@ -1,4 +1,4 @@
-# Transaction Categoriser
+# Transaction Categorizer
 
 [![CI](https://github.com/s-fk/transaction_categorization/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/s-fk/transaction_categorization/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
