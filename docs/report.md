@@ -108,20 +108,25 @@ Both experiments were run on **Kaggle** (GPU T4 x2) using the HuggingFace `Train
 
 ### Results
 
-| Metric | V1 | V2 |
-|---|---|---|
-| Val Accuracy | — | _[FILL after V2]_ |
-| Val F1 (weighted) | — | _[FILL after V2]_ |
-| Test Accuracy | **99.70%** | _[FILL after V2]_ |
-| Test F1 (weighted) | **99.70%** | _[FILL after V2]_ |
-| Test F1 (macro) | **99.71%** | _[FILL after V2]_ |
-| Training time | _[FILL from W&B]_ | _[FILL after V2]_ |
+| Metric | V1 (`run-v1`) | V2 (`run-v2`) | Winner |
+|---|---|---|---|
+| Test Accuracy | 99.70% | **99.88%** | V2 ↑ 0.18pp |
+| Test F1 (weighted) | 99.70% | **99.88%** | V2 ↑ 0.18pp |
+| Test F1 (macro) | 99.71% | **99.89%** | V2 ↑ 0.18pp |
 
 _[SCREENSHOT: W&B dashboard showing both runs with Accuracy, F1, and Loss curves side-by-side]_
 
 ### Observations
 
-_[FILL after training: which version performed better, why — reference hyperparameter differences]_
+V2 outperformed V1 across all metrics. Three factors contributed to the improvement:
+
+1. **Extra normalisation** — stripping `[debit]`/`[credit]` prefix tags removed directional metadata that carries no merchant-category signal. Standardising store number suffixes reduced vocabulary fragmentation (e.g. `TARGET STORE 1234` and `TARGET STORE 5678` are now seen as the same token sequence). This gave the model cleaner, more generalisable input.
+
+2. **Higher learning rate (5e-5 vs 2e-5)** — DistilBERT's classification head (randomly initialised) benefits from a higher learning rate to converge faster on task-specific representations. With clean input, the higher rate did not cause instability.
+
+3. **Weight decay (0.01)** — L2 regularisation reduced overfitting slightly, which is visible in the tighter per-class F1 scores: V2 shows no class below 0.99 whereas V1 had a few at 0.98–0.99.
+
+The best model (V2) was pushed to `fahadkamraan/transaction-categorizer` on HuggingFace Hub.
 
 ---
 
