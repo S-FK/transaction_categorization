@@ -21,5 +21,5 @@ requirements*.txt           @s-fk
 src/inference.py            @s-fk
 
 # ── Documentation / Report (Himanshu) ────────────────────────────────────────
-docs/                       @s-fk @himanshu-gh
-README.md                   @s-fk @himanshu-gh
+docs/                       @s-fk @g25ait2039-uid
+README.md                   @s-fk @g25ait2039-uid

@@ -24,7 +24,7 @@ Please read this guide fully before opening a branch, commit, or pull request.
 | S Fahad Kamraan | @s-fk | `.github/`, `Dockerfile`, `src/inference.py`, `README.md` |
 | Dhruvi Patel | @dhruvi9660 | `src/prepare_data.py`, `src/load_model.py`, `data/` |
 | Mahesh V | @Mahesh2058 |  `notebooks/` |
-| Himanshu Choubey | @(To Do) | `docs/` |
+| Himanshu Choubey | @g25ait2039-uid | `docs/` |
 
 
 ---
