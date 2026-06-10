@@ -11,25 +11,23 @@ inspects the raw data, cleans it, stratified-samples to 51,000 rows
 
 import json
 import re
-import sys
 from pathlib import Path
-from collections import Counter
 
 import pandas as pd
 from datasets import load_dataset
 from sklearn.model_selection import train_test_split
 
-DATASET_ID       = "DoDataThings/us-bank-transaction-categories-v2"
+DATASET_ID = "DoDataThings/us-bank-transaction-categories-v2"
 SAMPLES_PER_CLASS = 3_000
-RANDOM_SEED       = 42
-DATA_DIR          = Path(__file__).resolve().parent.parent / "data"
-PROCESSED_DIR     = DATA_DIR / "processed"
-ID2LABEL_PATH     = DATA_DIR / "id2label.json"
+RANDOM_SEED = 42
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+PROCESSED_DIR = DATA_DIR / "processed"
+ID2LABEL_PATH = DATA_DIR / "id2label.json"
 
 # Regex patterns for noise removal
-_REF_CODE_RE  = re.compile(r'\b[A-Z0-9]{6,}\b')
-_SPACES_RE    = re.compile(r'\s{2,}')
-_SPECIAL_RE   = re.compile(r'[*#@&]+')
+_REF_CODE_RE = re.compile(r'\b[A-Z0-9]{6,}\b')
+_SPACES_RE = re.compile(r'\s{2,}')
+_SPECIAL_RE = re.compile(r'[*#@&]+')
 
 
 def clean_description(text: str) -> str:
@@ -56,11 +54,11 @@ def inspect(df: pd.DataFrame) -> None:
     print(f"Columns          : {df.columns.tolist()}")
     print(f"Missing values   :\n{df.isnull().sum()}")
     print(f"Duplicate rows   : {df.duplicated().sum()}")
-    print(f"\nClass distribution (raw):")
+    print("\nClass distribution (raw):")
     dist = df['category'].value_counts()
     for cat, cnt in dist.items():
         print(f"  {cat:<30s}  {cnt:>5d}")
-    print(f"\nDescription length stats (chars):")
+    print("\nDescription length stats (chars):")
     lengths = df['description'].astype(str).str.len()
     print(f"  min={lengths.min()}, max={lengths.max()}, "
           f"mean={lengths.mean():.1f}, median={lengths.median():.0f}")
@@ -93,10 +91,7 @@ def main() -> None:
     print(f"\nStratified sampling: {SAMPLES_PER_CLASS} per class...")
     df_sampled = (
         df.groupby('category', group_keys=False)
-          .apply(lambda g: g.sample(
-              n=min(SAMPLES_PER_CLASS, len(g)),
-              random_state=RANDOM_SEED,
-          ))
+          .apply(lambda g: g.sample(n=min(SAMPLES_PER_CLASS, len(g)), random_state=RANDOM_SEED))
           .reset_index(drop=True)
     )
     print(f"Sampled shape: {df_sampled.shape}")
@@ -105,9 +100,9 @@ def main() -> None:
         print(f"  {cat:<30s}  {cnt:>5d}")
 
     # ── 5. Encode labels ──────────────────────────────────────────────────────
-    labels    = sorted(df_sampled['category'].unique().tolist())
-    id2label  = {str(i): lbl for i, lbl in enumerate(labels)}
-    label2id  = {lbl: i for i, lbl in enumerate(labels)}
+    labels = sorted(df_sampled['category'].unique().tolist())
+    id2label = {str(i): lbl for i, lbl in enumerate(labels)}
+    label2id = {lbl: i for i, lbl in enumerate(labels)}
 
     df_sampled['label'] = df_sampled['category'].map(label2id)
 
@@ -141,8 +136,8 @@ def main() -> None:
 
     # ── 8. Save processed CSVs (not committed to git) ─────────────────────────
     train_df.to_csv(PROCESSED_DIR / 'train.csv', index=False)
-    val_df.to_csv(PROCESSED_DIR   / 'val.csv',   index=False)
-    test_df.to_csv(PROCESSED_DIR  / 'test.csv',  index=False)
+    val_df.to_csv(PROCESSED_DIR / 'val.csv', index=False)
+    test_df.to_csv(PROCESSED_DIR / 'test.csv', index=False)
 
     print(f"Saved processed splits to {PROCESSED_DIR}/")
     print("\nDone. Only commit data/id2label.json — never commit CSV files.")

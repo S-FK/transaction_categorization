@@ -14,7 +14,7 @@ from pathlib import Path
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-BASE_MODEL    = "distilbert-base-uncased"
+BASE_MODEL = "distilbert-base-uncased"
 ID2LABEL_PATH = Path(__file__).resolve().parent.parent / "data" / "id2label.json"
 
 
@@ -41,7 +41,7 @@ def load_model(
         id2label = load_id2label()
 
     int_id2label = {int(k): v for k, v in id2label.items()}
-    label2id     = {v: int(k) for k, v in id2label.items()}
+    label2id = {v: int(k) for k, v in id2label.items()}
 
     model = AutoModelForSequenceClassification.from_pretrained(
         model_name,
@@ -54,11 +54,11 @@ def load_model(
 
 
 if __name__ == "__main__":
-    id2label  = load_id2label()
+    id2label = load_id2label()
     tokenizer = load_tokenizer()
-    model     = load_model(id2label=id2label)
+    model = load_model(id2label=id2label)
 
-    total     = sum(p.numel() for p in model.parameters())
+    total = sum(p.numel() for p in model.parameters())
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
 
     print(f"Model            : {BASE_MODEL}")

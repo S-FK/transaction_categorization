@@ -13,6 +13,9 @@ build/
 # Data — never commit raw or processed data files
 data/raw/
 data/processed/
+data/*.csv
+data/*.ipynb
+data/label2id.json
 *.csv
 *.parquet
 *.jsonl

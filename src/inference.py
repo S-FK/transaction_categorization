@@ -28,8 +28,8 @@ HF_MODEL_REPO = os.environ.get(
     "HF_MODEL_REPO", "fahadkamraan/transaction-categorizer"
 )
 INPUT_TEXT = os.environ.get("INPUT_TEXT", "").strip()
-HF_TOKEN   = os.environ.get("HF_TOKEN",   "").strip()
-TOP_K      = int(os.environ.get("TOP_K", "3"))
+HF_TOKEN = os.environ.get("HF_TOKEN", "").strip()
+TOP_K = int(os.environ.get("TOP_K", "3"))
 
 
 def authenticate() -> None:
@@ -72,7 +72,7 @@ def display(text: str, predictions: list[dict]) -> None:
     print(border)
     for rank, pred in enumerate(predictions, start=1):
         bar_len = int(pred['score'] * 30)
-        bar     = "█" * bar_len + "░" * (30 - bar_len)
+        bar = "█" * bar_len + "░" * (30 - bar_len)
         print(f"  {rank}. {pred['label']:<22s}  {bar}  {pred['score']:.4f}")
     print(border)
 
