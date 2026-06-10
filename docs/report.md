@@ -55,7 +55,7 @@ _[SCREENSHOT: Settings → Branches showing protection rules on main and develop
 | Source | [`DoDataThings/us-bank-transaction-categories-v2`](https://huggingface.co/datasets/DoDataThings/us-bank-transaction-categories-v2) |
 | Licence | MIT |
 | Raw size | ~68,000 rows |
-| Used subset | 51,000 rows — stratified 3,000 per class × 17 classes |
+| Used subset | 42,975 rows — up to 3,000 per class × 17 classes (some classes had fewer than 3,000 raw samples) |
 | Columns | `description` (text), `category` (label) |
 | Split | 80% train / 10% val / 10% test |
 
@@ -80,7 +80,7 @@ After cleaning, 51,000 samples were stratified-sampled (3,000/class) and split 8
 
 17 categories sorted alphabetically, assigned integer IDs 0–16, saved to `data/id2label.json`.
 
-**Categories:** Auto & Transport · Bills & Utilities · Business Services · Education · Entertainment · Fees & Charges · Food & Dining · Gifts & Donations · Health & Fitness · Home · Income · Investments · Personal Care · Shopping · Taxes · Transfer · Travel
+**Categories:** Education · Entertainment · Fees · Groceries · Healthcare · Income · Insurance · Mortgage · Personal Care · Rent · Restaurants · Shopping · Subscription · Transfer · Transportation · Travel · Utilities
 
 ---
 
