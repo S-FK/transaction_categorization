@@ -40,7 +40,7 @@ descriptions to classify them into 17 merchant spending categories.
 |---|---|---|
 | S Fahad Kamraan | G25AIT2091 | @s-fk |
 | Dhruvi Patel | G25AIT2030 | @dhruvi9660 |
-| Mahesh V | G25AIT2058 | @Mahesh2058 |
+| Mahesh V | G25AIT2058 | @maheshv2058-iitj |
 | Himanshu Choubey | G25AIT2039 | — |
 
 ---
