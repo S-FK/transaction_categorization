@@ -8,9 +8,9 @@
 | Name | Roll No. | GitHub |
 |---|---|---|
 | S Fahad Kamraan | G25AIT2091 | @s-fk |
-| Dhruvi Patel | — | @dhruvi9660 |
-| Mahesh | — | @Mahesh2058 |
-| Himanshu Chouhan | — | — |
+| Dhruvi Patel | G25AIT2030 | @dhruvi9660 |
+| Mahesh V | G25AIT2058 | @Mahesh2058 |
+| Himanshu Choubey | G25AIT2039 | — |
 
 ---
 
@@ -156,10 +156,10 @@ docker run --rm \
 | `src/prepare_data.py` | Task 2 — data pipeline (Dhruvi) |
 | `src/load_model.py` | Task 3 — model loading (Dhruvi) |
 | `src/inference.py` | Task 6/7 — inference (Fahad) |
-| `notebooks/train_v1.ipynb` | Task 4 V1 (Mahesh) |
-| `notebooks/train_v2.ipynb` | Task 4 V2 (Mahesh) |
+| `notebooks/train_v1.ipynb` | Task 4 V1 (Mahesh V) |
+| `notebooks/train_v2.ipynb` | Task 4 V2 (Mahesh V) |
 | `Dockerfile` | Task 6 — container (Fahad) |
-| `docs/report.md` | This report (Himanshu) |
+| `docs/report.md` | This report (Himanshu Choubey) |
 
 ---
 
