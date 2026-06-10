@@ -10,7 +10,7 @@
 | S Fahad Kamraan | G25AIT2091 | @s-fk |
 | Dhruvi Patel | G25AIT2030 | @dhruvi9660 |
 | Mahesh V | G25AIT2058 | @Mahesh2058 |
-| Himanshu Choubey | G25AIT2039 | — |
+| Himanshu Choubey | G25AIT2039 | @g25ait2039-uid |
 
 ---
 
