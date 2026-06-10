@@ -36,12 +36,12 @@ descriptions to classify them into 17 merchant spending categories.
 
 ## Team
 
-| Name | GitHub |
-|---|---|
-| S Fahad Kamraan | @s-fk |
-| Dhruvi Patel | @dhruvi9660 |
-| Mahesh | @Mahesh2058 |
-| Himanshu Chouhan | — |
+| Name | Roll No. | GitHub |
+|---|---|---|
+| S Fahad Kamraan | G25AIT2091 | @s-fk |
+| Dhruvi Patel | G25AIT2030 | @dhruvi9660 |
+| Mahesh V | G25AIT2058 | @maheshv2058-iitj |
+| Himanshu Choubey | G25AIT2039 | — |
 
 ---
 
