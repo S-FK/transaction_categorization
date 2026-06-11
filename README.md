@@ -15,11 +15,11 @@ descriptions to classify them into 17 merchant spending categories.
 | Resource | Link |
 |---|---|
 | GitHub Repository | https://github.com/s-fk/transaction_categorization |
-| Kaggle Notebook — V1 | _(To Do)_ |
-| Kaggle Notebook — V2 | _(To Do)_ |
-| HuggingFace Model | _(To Do)_ |
+| Kaggle Notebook — V1 | https://www.kaggle.com/code/mahesh2058/mlops-assignment-v1-v2-code |
+| Kaggle Notebook — V2 | https://www.kaggle.com/code/mahesh2058/mlops-assignment-v1-v2-code |
+| HuggingFace Model | https://huggingface.co/Mahesh2058/mlops-finance-classifier |
 | Docker Image | _(To Do)_ |
-| W&B Dashboard | _(To Do)_ |
+| W&B Dashboard | https://wandb.ai/maheshv2058-iitj-ac-in/mlops-assignment3 |
 
 ---
 
