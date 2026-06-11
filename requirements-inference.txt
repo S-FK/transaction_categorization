@@ -1,6 +1,6 @@
 # Slim dependencies for inference only (Docker + GitHub Actions)
 # CPU-only torch keeps the image small
-torch==2.3.0+cpu
-transformers==4.41.2
-huggingface-hub==0.23.2
+torch==2.7.1+cpu
+transformers==4.44.2
+huggingface-hub==0.24.7
 tokenizers==0.19.1
