@@ -62,7 +62,9 @@ def run_inference(text: str) -> list[dict]:
         device=-1,       # CPU — avoids GPU dependency in CI
         top_k=TOP_K,
     )
-    return classifier(text)
+    result = classifier(text)
+    # pipeline with top_k returns [[dict, ...]] for a single string input
+    return result[0] if result and isinstance(result[0], list) else result
 
 
 def display(text: str, predictions: list[dict]) -> None:
