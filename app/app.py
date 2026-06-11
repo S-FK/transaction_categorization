@@ -13,10 +13,10 @@ from transformers import pipeline
 MODEL_REPO = os.environ.get("HF_MODEL_REPO", "fahadkamraan/transaction-categorizer")
 
 _REF_CODE_RE = re.compile(r'\b[A-Z0-9]{6,}\b')
-_SPACES_RE   = re.compile(r'\s{2,}')
-_SPECIAL_RE  = re.compile(r'[*#@&]+')
-_PREFIX_RE   = re.compile(r'^\[(debit|credit)\]\s*', re.IGNORECASE)
-_STORE_RE    = re.compile(r'\b(store|branch|#)\s*\d+\b', re.IGNORECASE)
+_SPACES_RE = re.compile(r'\s{2,}')
+_SPECIAL_RE = re.compile(r'[*#@&]+')
+_PREFIX_RE = re.compile(r'^\[(debit|credit)\]\s*', re.IGNORECASE)
+_STORE_RE = re.compile(r'\b(store|branch|#)\s*\d+\b', re.IGNORECASE)
 
 
 def preprocess(text: str) -> str:
@@ -65,7 +65,7 @@ def classify_single(text: str) -> dict:
 
     scores = {p["label"]: round(p["score"], 4) for p in preds}
     top = preds[0]
-    summary = f"**{top['label']}** ({top['score']*100:.1f}% confidence)"
+    summary = f"**{top['label']}** ({top['score'] * 100:.1f}% confidence)"
     return scores, summary
 
 
@@ -82,9 +82,11 @@ def classify_csv(file) -> pd.DataFrame:
         return pd.DataFrame({"error": [f"Could not read CSV: {e}"]})
 
     desc_col = None
-    for candidate in ["description", "Description", "DESCRIPTION",
-                       "transaction", "Transaction", "merchant", "Merchant",
-                       "details", "Details", "narration", "Narration"]:
+    for candidate in [
+        "description", "Description", "DESCRIPTION",
+        "transaction", "Transaction", "merchant", "Merchant",
+        "details", "Details", "narration", "Narration",
+    ]:
         if candidate in df.columns:
             desc_col = candidate
             break
@@ -100,7 +102,7 @@ def classify_csv(file) -> pd.DataFrame:
         results = clf(clean)
         preds = results[0] if results and isinstance(results[0], list) else results
         categories.append(preds[0]["label"])
-        confidences.append(f"{preds[0]['score']*100:.1f}%")
+        confidences.append(f"{preds[0]['score'] * 100:.1f}%")
 
     out = df.copy()
     out["Predicted Category"] = categories
@@ -160,7 +162,7 @@ with gr.Blocks(
                     classify_btn = gr.Button("Classify", variant="primary")
 
                 with gr.Column(scale=2):
-                    result_label  = gr.Markdown(label="Top Prediction")
+                    result_label = gr.Markdown(label="Top Prediction")
                     result_scores = gr.Label(label="Top 5 Probabilities", num_top_classes=5)
 
             gr.Examples(examples=EXAMPLES, inputs=txt_input, label="Try an example")
@@ -183,8 +185,8 @@ The app will detect the description column automatically (or use the first colum
 
 **Expected columns:** `description`, `transaction`, `merchant`, `details`, or `narration`
 """)
-            csv_input  = gr.File(label="Upload CSV", file_types=[".csv"])
-            csv_btn    = gr.Button("Categorise All Transactions", variant="primary")
+            csv_input = gr.File(label="Upload CSV", file_types=[".csv"])
+            csv_btn = gr.Button("Categorise All Transactions", variant="primary")
             csv_output = gr.DataFrame(label="Results", wrap=True)
 
             csv_btn.click(fn=classify_csv, inputs=csv_input, outputs=csv_output)
