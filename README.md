@@ -6,9 +6,9 @@
 [![Spaces](https://img.shields.io/badge/HuggingFace-Demo-blue)](https://huggingface.co/spaces/fahadkamraan/transaction-categorizer-demo)
 
 End-to-end MLOps pipeline that fine-tunes **DistilBERT** on real bank transaction
-descriptions to classify them into **17 merchant spending categories** — achieving **99.88% test accuracy**.
+descriptions to classify them into **17 merchant spending categories**.
 
-> IIT Jodhpur · M.Tech AI · ML Ops — CSL 7040
+> ML Ops Group Project
 
 ---
 
@@ -31,23 +31,37 @@ ways — a Docker container, a GitHub Actions workflow, and a live Gradio web ap
 
 ## Live Demo
 
-The fastest way to see it in action is the hosted web app — nothing to install:
+Try it out with our hosted web app:
 
 🌐 **[huggingface.co/spaces/fahadkamraan/transaction-categorizer-demo](https://huggingface.co/spaces/fahadkamraan/transaction-categorizer-demo)**
 
 It supports two modes:
 
-- **Single transaction** — type or paste a description (e.g. `STARBUCKS STORE 12345`) and get the
+- **Single transaction** — Type or paste a description (e.g. `STARBUCKS STORE 12345`) and get the
   predicted category with a confidence breakdown.
-- **Bank statement upload** — drop in a CSV and every row is categorised at once. A ready-made
+- **Bank statement upload** — Upload a CSV and every row is categorised at once. A ready-made
   sample, [`test_transactions.csv`](app/test_transactions.csv) with 49 realistic transactions, is
   included to try immediately.
 
 ---
 
+## Project Links
+
+| Resource | Link |
+|---|---|
+| GitHub Repository | https://github.com/S-FK/transaction_categorization |
+| Kaggle Notebook — V1 | https://www.kaggle.com/code/fahadkamraaniitj/train-v1 |
+| Kaggle Notebook — V2 | https://www.kaggle.com/code/fahadkamraaniitj/train-v2 |
+| HuggingFace Model | https://huggingface.co/fahadkamraan/transaction-categorizer |
+| Docker Image | https://hub.docker.com/r/fahadkamraan/mlops-transaction-classifier |
+| W&B Dashboard | https://wandb.ai/fahadkamraan_sfk/mlops-transaction-classifier |
+| Web Demo (Gradio) | https://huggingface.co/spaces/fahadkamraan/transaction-categorizer-demo |
+
+---
+
 ## How It Works — Pipeline Overview
 
-The project wires together seven stages into one reproducible pipeline:
+The project builds a complete, production-style MLOps pipeline. Here is how every component connects:
 
 ```mermaid
 flowchart TD
@@ -78,47 +92,6 @@ flowchart TD
     style H fill:#1E293B,color:#fff,stroke:#0F172A
     style I fill:#7C3AED,color:#fff,stroke:#6D28D9
 ```
-
-Everything downstream of training is loosely coupled through **HuggingFace Hub as the central model
-registry** — the Docker container, the Actions workflow, and the Gradio app all load the model at
-runtime rather than baking it in.
-
-### What happens when data changes
-
-The pipeline has a clear **cut point** at the HuggingFace Hub push:
-
-```
-DATA CHANGES
-     │
-     │  ← MANUAL (you do these)
-     ▼
-  1. Edit src/prepare_data.py  →  re-run  →  new CSVs
-  2. Re-run notebooks on Kaggle (V1 and V2)
-  3. New model pushed to HuggingFace Hub
-     │
-     │  ← AUTOMATIC (happens on its own)
-     ▼
-  Gradio Space  ─┐
-  Docker run    ─┼─ all load the model from HF Hub at runtime
-  GitHub Actions─┘  → pick up the new model with zero redeployment
-```
-
-Because inference loads the model at runtime, updating the model on HF Hub automatically updates all
-three consumers. To retrain with new data: re-run the notebooks → push new weights → done.
-
-### MLOps maturity
-
-This project sits at **Level 1** on the MLOps maturity scale:
-
-```
-Level 0        Level 1 ← WE ARE HERE     Level 2              Level 3
-──────────     ────────────────────────   ──────────────────   ──────────────────────
-Jupyter        Scripts + Git + W&B        CI/CD triggers        Feature store +
-notebooks      HF Hub + Docker +          retraining on         drift monitoring +
-only           GitHub Actions +           data change +         auto-rollback +
-               Gradio demo               model registry        A/B testing
-```
-
 ---
 
 ## Quick Start
@@ -196,23 +169,49 @@ transaction_categorization/
 
 ---
 
-## Project Links
 
-| Resource | Link |
-|---|---|
-| GitHub Repository | https://github.com/S-FK/transaction_categorization |
-| Kaggle Notebook — V1 | https://www.kaggle.com/code/fahadkamraaniitj/train-v1 |
-| Kaggle Notebook — V2 | https://www.kaggle.com/code/fahadkamraaniitj/train-v2 |
-| HuggingFace Model | https://huggingface.co/fahadkamraan/transaction-categorizer |
-| Docker Image | https://hub.docker.com/r/fahadkamraan/mlops-transaction-classifier |
-| W&B Dashboard | https://wandb.ai/fahadkamraan_sfk/mlops-transaction-classifier |
-| Web Demo (Gradio) | https://huggingface.co/spaces/fahadkamraan/transaction-categorizer-demo |
+### What happens when data changes
+
+The pipeline has a clear **cut point** at the HuggingFace Hub push:
+
+```
+DATA CHANGES
+     │
+     │  ← MANUAL (you do these)
+     ▼
+  1. Edit src/prepare_data.py  →  re-run  →  new CSVs
+  2. Re-run notebooks on Kaggle (V1 and V2)
+  3. New model pushed to HuggingFace Hub
+     │
+     │  ← AUTOMATIC (happens on its own)
+     ▼
+  Gradio Space  ─┐
+  Docker run    ─┼─ all load the model from HF Hub at runtime
+  GitHub Actions─┘  → pick up the new model with zero redeployment
+```
+
+Because inference loads the model at runtime, updating the model on HF Hub automatically updates all
+three consumers. To retrain with new data: re-run the notebooks → push new weights → done.
 
 ---
 
-## Contributing
+### MLOps maturity
 
-All work follows a protected-branch, pull-request workflow:
+This project sits at **Level 1** on the MLOps maturity scale:
+
+```
+Level 0        Level 1 ← WE ARE HERE     Level 2              Level 3
+──────────     ────────────────────────   ──────────────────   ──────────────────────
+Jupyter        Scripts + Git + W&B        CI/CD triggers        Feature store +
+notebooks      HF Hub + Docker +          retraining on         drift monitoring +
+only           GitHub Actions +           data change +         auto-rollback +
+               Gradio demo               model registry        A/B testing
+```
+
+---
+
+
+## Branching Strategy
 
 ```
 main      ← protected · submission state · PR from develop only
@@ -220,12 +219,23 @@ main      ← protected · submission state · PR from develop only
         └── feature/<description>  ← where all work happens
 ```
 
-In short: branch off `develop`, commit using [Conventional Commits](https://www.conventionalcommits.org),
+See [CONTRIBUTING.md](CONTRIBUTING.md) for branch naming, commit format, and PR rules.
+
+---
+
+## Contributing
+
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** for:
+- Branch naming convention (`feature/`, `fix/`, `docs/`, `chore/`)
+- Commit message format (Conventional Commits)
+- PR checklist and review process
+- Code style and lint rules
+- Who owns what and who to contact when blocked
+
+
+Note: branch off `develop`, commit using [Conventional Commits](https://www.conventionalcommits.org),
 make sure `flake8 src/ --max-line-length=120` passes, then open a PR back into `develop`. Never push
 directly to `main` or `develop`.
-
-Full details — branch naming, commit format, the PR checklist, code style, and who owns which files —
-are in **[CONTRIBUTING.md](CONTRIBUTING.md)**.
 
 ---
 
@@ -237,6 +247,16 @@ are in **[CONTRIBUTING.md](CONTRIBUTING.md)**.
 | Dhruvi Patel | G25AIT2030 | [@dhruvi9660](https://github.com/dhruvi9660) |
 | Mahesh V | G25AIT2058 | [@maheshv2058-iitj](https://github.com/maheshv2058-iitj) |
 | Himanshu Choubey | G25AIT2039 | [@g25ait2039-uid](https://github.com/g25ait2039-uid) |
+
+---
+
+
+## GitHub Secrets Required
+
+| Secret | Purpose |
+|---|---|
+| `HF_TOKEN` | Pull model from HuggingFace Hub in Actions |
+| `WANDB_API_KEY` | Log metrics to W&B (set in Kaggle Secrets too) |
 
 ---
 
