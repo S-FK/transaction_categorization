@@ -22,11 +22,11 @@
 | Resource | Link |
 |---|---|
 | GitHub Repository | https://github.com/S-FK/transaction_categorization |
-| Kaggle Notebook — V1 | _[FILL after running]_ |
-| Kaggle Notebook — V2 | _[FILL after running]_ |
+| Kaggle Notebook — V1 | https://www.kaggle.com/code/fahadkamraaniitj/train-v1 |
+| Kaggle Notebook — V2 | https://www.kaggle.com/code/fahadkamraaniitj/train-v2 |
 | HuggingFace Model | https://huggingface.co/fahadkamraan/transaction-categorizer |
 | Docker Image | https://hub.docker.com/r/fahadkamraan/mlops-transaction-classifier |
-| W&B Dashboard | _[FILL after training]_ |
+| W&B Dashboard | https://wandb.ai/fahadkamraan_sfk/mlops-transaction-classifier |
 
 ---
 
@@ -175,7 +175,17 @@ CMD ["python", "inference.py"]
 
 **Docker Hub:** `fahadkamraan/mlops-transaction-classifier:latest`
 
-_[FILL: paste successful `docker run` output here]_
+```
+Loading model : fahadkamraan/transaction-categorizer
+
+────────────────────────────────────────────────────
+  Transaction : starbucks coffee purchase
+────────────────────────────────────────────────────
+  1. Restaurants             ██████████████████████████████  1.0000
+  2. Entertainment           ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0000
+  3. Subscription            ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0000
+────────────────────────────────────────────────────
+```
 
 ---
 
@@ -189,10 +199,19 @@ Triggers on push to `develop` and PRs to `main`. Runs `flake8 src/ --max-line-le
 
 Manual dispatch (`workflow_dispatch`) — accepts a transaction string, installs inference deps, runs `src/inference.py` using `HF_TOKEN` from GitHub Secrets.
 
-_[SCREENSHOT: GitHub Actions → Inference → successful run showing classification output]_
+_[SCREENSHOT: See attached — GitHub Actions → Inference #1 → Run Transaction Classifier → Success (47s)]_
 
 ```
-[FILL: paste Actions log of successful inference run]
+Run Transaction Classifier
+  Loading model : fahadkamraan/transaction-categorizer
+
+  ────────────────────────────────────────────────────
+    Transaction : starbucks coffee purchase
+  ────────────────────────────────────────────────────
+    1. Restaurants             ██████████████████████████████  1.0000
+    2. Entertainment           ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0000
+    3. Subscription            ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0000
+  ────────────────────────────────────────────────────
 ```
 
 ### GitHub Secrets
@@ -210,9 +229,9 @@ Both runs (V1 and V2) are logged to W&B project **`mlops-transaction-classifier`
 
 Metrics logged: training loss, validation loss, accuracy, F1 (weighted), all hyperparameters, HuggingFace model URL (V2).
 
-**W&B Dashboard:** _[FILL: paste public W&B project URL]_
+**W&B Dashboard:** https://wandb.ai/fahadkamraan_sfk/mlops-transaction-classifier
 
-_[SCREENSHOT: W&B Runs Comparison table with Accuracy, F1, Loss for V1 vs V2]_
+_[SCREENSHOT: W&B Runs Comparison table with Accuracy, F1, Loss for V1 vs V2 — see attached]_
 
 ---
 
