@@ -1,8 +1,10 @@
+<div style="text-align:center"><img src="screenshots/iitj-logo-hq.jpg" width="110"/></div>
+
 # MLOps Group Assignment Report
 ## End-to-End MLOps Pipeline: Bank Transaction Merchant Categorisation
 
 **Institution:** IIT Jodhpur — M.Tech Artificial Intelligence (PGD AI Program)
-**Course:** ML Ops | **Total Marks:** 100
+**Course:** ML Ops — CSL 7040 | **Total Marks:** 100
 
 ---
 
@@ -10,9 +12,9 @@
 
 | Name | Roll No. | GitHub | Contribution |
 |---|---|---|---|
-| S Fahad Kamraan | G25AIT2091 | @s-fk | Project lead; GitHub repository setup, branch protection, CI/CD pipeline, Dockerfile, inference script, GitHub Actions workflows, Docker Hub deployment, end-to-end pipeline integration, data preparation, and model training |
-| Dhruvi Patel | G25AIT2030 | @dhruvi9660 | Data preparation scripts (`src/prepare_data.py`, `src/load_model.py`), label encoding, dataset cleaning |
-| Mahesh V | G25AIT2058 | @maheshv2058-iitj | Kaggle training setup, W&B experiment configuration, hyperparameter design |
+| S Fahad Kamraan | G25AIT2091 | @s-fk | GitHub setup, CI/CD, Dockerfile, inference script, GitHub Actions, Docker Hub |
+| Dhruvi Patel | G25AIT2030 | @dhruvi9660 | Data preparation, cleaning pipeline, label encoding |
+| Mahesh V | G25AIT2058 | @maheshv2058-iitj | Kaggle training, W&B tracking, HuggingFace model push |
 | Himanshu Choubey | G25AIT2039 | @g25ait2039-uid | Report preparation and documentation |
 
 ---
