@@ -6,7 +6,8 @@ FROM python:3.11-slim
 # Override at build time:
 #   docker build --build-arg HF_MODEL_NAME=fahadkamraan/transaction-categorizer .
 ARG HF_MODEL_NAME=fahadkamraan/transaction-categorizer
-ENV HF_MODEL_REPO=${HF_MODEL_NAME}
+ENV HF_MODEL_REPO=${HF_MODEL_NAME} \
+    HF_HOME=/tmp/hf_cache
 
 # ── Security: run as non-root user ────────────────────────────────────────────
 RUN groupadd --gid 1001 appgroup \
