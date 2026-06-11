@@ -1,6 +1,6 @@
 # Transaction Categorizer
 
-[![CI](https://github.com/s-fk/transaction_categorization/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/s-fk/transaction_categorization/actions/workflows/ci.yml)
+[![CI](https://github.com/S-FK/transaction_categorization/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/S-FK/transaction_categorization/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 End-to-end MLOps pipeline that fine-tunes **DistilBERT** on real bank transaction
@@ -14,12 +14,12 @@ descriptions to classify them into 17 merchant spending categories.
 
 | Resource | Link |
 |---|---|
-| GitHub Repository | https://github.com/s-fk/transaction_categorization |
-| Kaggle Notebook — V1 | _(To Do)_ |
-| Kaggle Notebook — V2 | _(To Do)_ |
-| HuggingFace Model | _(To Do)_ |
-| Docker Image | _(To Do)_ |
-| W&B Dashboard | _(To Do)_ |
+| GitHub Repository | https://github.com/S-FK/transaction_categorization |
+| Kaggle Notebook — V1 | https://www.kaggle.com/code/fahadkamraaniitj/train-v1 |
+| Kaggle Notebook — V2 | https://www.kaggle.com/code/fahadkamraaniitj/train-v2 |
+| HuggingFace Model | https://huggingface.co/fahadkamraan/transaction-categorizer |
+| Docker Image | https://hub.docker.com/r/fahadkamraan/mlops-transaction-classifier |
+| W&B Dashboard | https://wandb.ai/fahadkamraan_sfk/mlops-transaction-classifier |
 
 ---
 
