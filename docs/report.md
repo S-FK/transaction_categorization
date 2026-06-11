@@ -29,6 +29,7 @@
 | HuggingFace Model | https://huggingface.co/fahadkamraan/transaction-categorizer |
 | Docker Image | https://hub.docker.com/r/fahadkamraan/mlops-transaction-classifier |
 | W&B Dashboard | https://wandb.ai/fahadkamraan_sfk/mlops-transaction-classifier |
+| Web Demo (Gradio) | https://huggingface.co/spaces/fahadkamraan/transaction-categorizer-demo |
 
 ---
 
@@ -172,6 +173,53 @@ wandb.run.summary['huggingface_model'] = \
 **Model URL:** https://huggingface.co/fahadkamraan/transaction-categorizer
 
 ---
+
+
+---
+
+## Pipeline Overview & System Architecture
+
+### End-to-End Flow
+
+![Pipeline Diagram](screenshots/pipeline_diagram.png)
+
+The pipeline connects seven stages — from raw data on HuggingFace Hub through to a live Gradio web
+app — with HuggingFace Hub acting as the central model registry that decouples training from serving.
+
+### System Architecture
+
+![Architecture Diagram](screenshots/architecture_diagram.png)
+
+Because inference loads the model at runtime (not baked into the container), updating the model on
+HF Hub automatically updates the Docker container, the GitHub Actions workflow, and the Gradio Space
+with zero redeployment.
+
+### What Happens When Data Changes
+
+![Data Change Diagram](screenshots/data_change_diagram.png)
+
+Steps 1–3 (data prep through model push) are manual; everything downstream is automatic.
+
+### MLOps Maturity
+
+![MLOps Maturity](screenshots/mlops_maturity.png)
+
+This project operates at Level 1 — the complete MLOps workflow expected for an M.Tech assignment.
+
+---
+
+## Bonus: Gradio Web Demo
+
+A Gradio web application is deployed on HuggingFace Spaces for live testing without any local setup:
+
+**🌐 https://huggingface.co/spaces/fahadkamraan/transaction-categorizer-demo**
+
+The app provides two modes:
+
+- **Single transaction** — paste any description and receive the top-5 predicted categories with confidence scores
+- **CSV upload** — upload a bank statement CSV; the app auto-detects the description column and categorises every row
+
+A sample file (`test_transactions.csv`, 49 transactions across all 17 categories) is included in the Space for immediate testing. The app is built with Gradio and hosted free on HuggingFace Spaces — no server management required.
 
 ## Task 6: Docker Inference Container
 
