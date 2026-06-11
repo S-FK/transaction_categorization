@@ -75,7 +75,9 @@ def classify_csv(file) -> pd.DataFrame:
         return pd.DataFrame({"error": ["No file uploaded."]})
 
     try:
-        df = pd.read_csv(file.name)
+        # Gradio 6.x passes filepath as str; Gradio 4.x passes object with .name
+        filepath = file if isinstance(file, str) else file.name
+        df = pd.read_csv(filepath)
     except Exception as e:
         return pd.DataFrame({"error": [f"Could not read CSV: {e}"]})
 
